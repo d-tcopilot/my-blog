@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>独立开发者 | 创造实用的AI小工具</title>
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --card-bg: #1a1a1a;
+    --card-hover: #222222;
+    --text: #e8e8e6;
+    --text-secondary: #9e9e9e;
+    --accent: #4da6ff;
+    --border: rgba(255,255,255,0.08);
+    --radius: 14px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  /* 主容器 */
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 60px 24px 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* 头部 */
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 44px;
+    width: 100%;
+  }
+  .avatar {
+    width: 88px; height: 88px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2a3a5c, #1a2a4a);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 40px;
+    margin-bottom: 20px;
+    border: 2px solid rgba(255,255,255,0.06);
+    user-select: none;
+  }
+  .header h1 {
+    font-size: 26px; font-weight: 700;
+    letter-spacing: -0.3px; margin-bottom: 10px;
+    text-align: center;
+  }
+  .header .tagline {
+    font-size: 15px; color: var(--text-secondary);
+    text-align: center; max-width: 420px;
+    line-height: 1.6;
+  }
+
+  /* 分区标题 */
+  .section-label {
+    width: 100%; text-align: left;
+    font-size: 13px; font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 16px; margin-top: 8px;
+  }
+
+  /* 项目卡片 */
+  .project-list {
+    width: 100%; display: flex;
+    flex-direction: column; gap: 12px;
+    margin-bottom: 40px;
+  }
+  .project-card {
+    display: flex; align-items: center; gap: 16px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    text-decoration: none; color: inherit;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .project-card:hover {
+    background: var(--card-hover);
+    border-color: rgba(255,255,255,0.12);
+    transform: translateY(-1px);
+  }
+  .project-card:active { transform: scale(0.995); }
+  .project-icon {
+    font-size: 28px; flex-shrink: 0;
+    width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.04);
+  }
+  .project-info {
+    flex: 1; min-width: 0;
+    display: flex; flex-direction: column; gap: 3px;
+  }
+  .project-info .project-title {
+    font-size: 16px; font-weight: 600;
+    color: var(--text); line-height: 1.3;
+  }
+  .project-info .project-desc {
+    font-size: 13px; color: var(--text-secondary);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .project-arrow {
+    font-size: 18px; color: var(--text-secondary);
+    flex-shrink: 0; transition: transform 0.2s, color 0.2s;
+  }
+  .project-card:hover .project-arrow {
+    transform: translateX(3px);
+    color: var(--accent);
+  }
+
+  /* 社交链接 */
+  .social-list {
+    width: 100%; display: flex;
+    flex-direction: column; gap: 10px;
+    margin-bottom: 40px;
+  }
+  .social-link {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 22px;
+    text-decoration: none; color: inherit;
+    transition: background 0.2s, border-color 0.2s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .social-link:hover {
+    background: var(--card-hover);
+    border-color: rgba(255,255,255,0.12);
+  }
+  .social-link .social-icon { font-size: 22px; flex-shrink: 0; }
+  .social-link .social-name { flex: 1; font-size: 15px; font-weight: 500; }
+  .social-link .social-arrow {
+    font-size: 16px; color: var(--text-secondary);
+    transition: transform 0.2s, color 0.2s;
+  }
+  .social-link:hover .social-arrow {
+    transform: translateX(3px);
+    color: var(--accent);
+  }
+
+  .contact-list {
+    width: 100%; display: flex;
+    flex-direction: column; gap: 10px;
+    margin-bottom: 48px;
+  }
+
+  .footer {
+    text-align: center; font-size: 12px;
+    color: #555; margin-top: auto;
+    padding-bottom: 20px;
+  }
+
+  @media (max-width: 480px) {
+    .container { padding: 40px 16px 32px; }
+    .header h1 { font-size: 22px; }
+    .project-card { padding: 16px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header class="header">
+    <div class="avatar">🖥️</div>
+    <h1>独立开发者 | 创造实用的AI小工具</h1>
+    <p class="tagline">专注于开发简洁、高效的桌面工具与Web应用，用技术解决实际问题。每一行代码都为提升效率而写。</p>
+  </header>
+
+  <!-- 我的项目 -->
+  <div class="section-label">我的项目</div>
+  <div class="project-list">
+
+    <a class="project-card" href="pc-quote.html">
+      <div class="project-icon">💻</div>
+      <div class="project-info">
+        <div class="project-title">电脑回收计价器</div>
+        <div class="project-desc">智能回收报价工具，选择配件即算整机残值，支持保存记录与导出打印</div>
+      </div>
+      <span class="project-arrow">→</span>
+    </a>
+
+    <div class="project-card" onclick="alert('即将上线，敬请期待')">
+      <div class="project-icon">📝</div>
+      <div class="project-info">
+        <div class="project-title">AI 文案助手</div>
+        <div class="project-desc">大模型驱动的智能写作工具，营销文案、周报总结一键生成</div>
+      </div>
+      <span class="project-arrow">→</span>
+    </div>
+
+    <div class="project-card" onclick="alert('即将上线，敬请期待')">
+      <div class="project-icon">📊</div>
+      <div class="project-info">
+        <div class="project-title">数据可视化面板</div>
+        <div class="project-desc">导入 Excel/CSV 自动生成交互式图表看板，多维筛选实时刷新</div>
+      </div>
+      <span class="project-arrow">→</span>
+    </div>
+
+    <div class="project-card" onclick="alert('即将上线，敬请期待')">
+      <div class="project-icon">🔍</div>
+      <div class="project-info">
+        <div class="project-title">本地文件搜索器</div>
+        <div class="project-desc">毫秒级全盘检索，支持内容全文匹配，比系统自带快10倍</div>
+      </div>
+      <span class="project-arrow">→</span>
+    </div>
+
+  </div>
+
+  <!-- 社交媒体 -->
+  <div class="section-label">社交媒体</div>
+  <div class="social-list">
+    <a href="#" class="social-link" onclick="event.preventDefault()">
+      <span class="social-icon">📺</span>
+      <span class="social-name">哔哩哔哩</span>
+      <span class="social-arrow">→</span>
+    </a>
+    <a href="#" class="social-link" onclick="event.preventDefault()">
+      <span class="social-icon">📕</span>
+      <span class="social-name">小红书</span>
+      <span class="social-arrow">→</span>
+    </a>
+    <a href="#" class="social-link" onclick="event.preventDefault()">
+      <span class="social-icon">🎵</span>
+      <span class="social-name">抖音</span>
+      <span class="social-arrow">→</span>
+    </a>
+    <a href="#" class="social-link" onclick="event.preventDefault()">
+      <span class="social-icon">▶️</span>
+      <span class="social-name">YouTube</span>
+      <span class="social-arrow">→</span>
+    </a>
+  </div>
+
+  <!-- 联系我 -->
+  <div class="section-label">联系我</div>
+  <div class="contact-list">
+    <a href="#" class="social-link" onclick="event.preventDefault()">
+      <span class="social-icon">📧</span>
+      <span class="social-name">加入开发者社群</span>
+      <span class="social-arrow">→</span>
+    </a>
+    <a href="#" class="social-link" onclick="event.preventDefault()">
+      <span class="social-icon">💬</span>
+      <span class="social-name">商务合作 / 项目咨询</span>
+      <span class="social-arrow">→</span>
+    </a>
+  </div>
+
+  <footer class="footer">&copy; 2026 DevFolio &mdash; Built with simplicity in mind.</footer>
+
+</div>
+
+
+</body>
+</html>
